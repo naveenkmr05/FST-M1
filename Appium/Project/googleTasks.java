@@ -1,4 +1,4 @@
-package LiveProject;
+package activities;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-public class Activity2 {
+public class googleTasks() {
 
     AppiumDriver driver;
     WebDriverWait wait;
