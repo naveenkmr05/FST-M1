@@ -49,16 +49,24 @@ public class activity2 {
 
         doSwipe(driver, start, end, 200);
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.TextView[contains(@text='To-Do List')]"))).click();
-
-        driver.findElement(AppiumBy.id("taskInput")).sendKeys("Get number of tasks");
-        driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Add Task']"));
-        driver.findElement(AppiumBy.id("taskInput")).sendKeys("Clear the list");
-        driver.findElement(AppiumBy.xpath("//android.widget.Button[@text='Add Task']"));
-
-        driver.findElement(AppiumBy.xpath("//android.view.View[@text='Add more tasks to this list.']")).click();
-        driver.findElement(AppiumBy.xpath("//android.view.View[@text='Get number of tasks']")).click();
-        driver.findElement(AppiumBy.xpath("//android.view.View[@text='Clear the list']")).click();
-
-        driver.findElement(AppiumBy.className("android.view.View[@text='Clear List']")).click();
+  
+        By addTaskBtn = AppiumBy.xpath("//android.widget.Button[@text='Add Task']");
+        By taskField = AppiumBy.xpath("//android.widget.EditText[@resource-id='taskInput']");
+        By clearBtn = AppiumBy.xpath("//android.widget.TextView[@text=' Clear List']");
+        By taskList = AppiumBy.xpath("//android.view.View[@resource-id='tasksList']/android.view.View");
+        driver.findElement(taskField).sendKeys("test1");
+        driver.findElement(addTaskBtn).click();
+        driver.findElement(taskField).sendKeys("test2");
+        driver.findElement(addTaskBtn).click();
+        driver.findElement(taskField).sendKeys("test3");
+        driver.findElement(addTaskBtn).click();
+        List<WebElement> taskListelems = driver.findElements(taskList);
+        Assert.assertEquals(taskListelems.size(),4);
+        for(WebElement elem: taskListelems){
+            elem.click();
+        }
+        driver.findElement(clearBtn).click();
+        taskListelems = driver.findElements(taskList);
+        Assert.assertEquals(taskListelems.size(),0);
     }
 }
